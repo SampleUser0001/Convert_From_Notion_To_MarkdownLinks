@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "simple": {
+      "format": "%(asctime)s %(name)s:%(lineno)s %(funcName)s [%(levelname)s]: %(message)s"
+    }
+  },
+
+  "handlers": {
+    "consoleHandler": {
+      "class": "logging.StreamHandler",
+      "level": "INFO",
+      "formatter": "simple",
+      "stream": "ext://sys.stdout"
+    },
+    "fileHandler": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "when": "H",
+      "backupCount": 5,
+      "interval" : 1,
+      "level": "DEBUG",
+      "formatter": "simple",
+      "filename": "log/app.log",
+      "encoding": "utf-8"
+    },
+    "testFileHandler": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "when": "H",
+      "backupCount": 5,
+      "interval" : 1,
+      "level": "DEBUG",
+      "formatter": "simple",
+      "filename": "log/test.log",
+      "encoding": "utf-8"
+    }
+  },
+
+  "loggers": {
+    "__main__": {
+      "level": "DEBUG",
+      "handlers": ["consoleHandler", "fileHandler"],
+      "propagate": false
+    },
+    "util": {
+      "level": "DEBUG",
+      "handlers": ["consoleHandler", "fileHandler"],
+      "propagate": false
+    },
+    "controller": {
+      "level": "DEBUG",
+      "handlers": ["consoleHandler", "fileHandler"],
+      "propagate": false
+    },
+    "test": {
+      "level": "DEBUG",
+      "handlers": ["consoleHandler", "testFileHandler"],
+      "propagate": false
+    }
+  },
+
+  "root": {
+    "level": "INFO"
+  }
+}
