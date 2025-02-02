@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
 from os.path import join, dirname
-from dotenv import load_dotenv
+import json
 from enum import Enum
 
-load_dotenv(verbose=True)
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
+env_path = join(dirname(__file__), 'environment.json')
+json_open = open(env_path, 'r')
 
 class ImportEnvKeyEnum(Enum):
     """ .envファイルのキーを書く """
-    SAMPLE = os.getenv("SAMPLE")
+    SAMPLE = json.load(json_open)['SAMPLE']

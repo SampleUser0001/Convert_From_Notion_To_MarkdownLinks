@@ -57,6 +57,15 @@ docker-compose -f docker-compose_getRequirements.yml up
 docker-compose -f docker-compose.unittest.yml up
 ```
 
+## ログ設定
+
+- ファイルパス
+    - `app\config\log_config.json`
+
+### Note
+
+- `handlers`と`loggers`で両方設定すると、ログレベルが高いほうが優先される。
+
 ## 参考
 
 - [Qiita:Docker を使う（python のイメージで色々確認してみる）](https://qiita.com/landwarrior/items/fd918da9ebae20486b81)

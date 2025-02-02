@@ -1,8 +1,8 @@
 version: '3'
 services:
-  python:
+  pytest:
     build: .
-    container_name: python
+    container_name: pytest
     volumes:
       - ./app:/opt/app
     entrypoint: /opt/app/unittest.sh

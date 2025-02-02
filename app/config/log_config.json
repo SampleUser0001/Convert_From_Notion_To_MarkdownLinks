@@ -3,7 +3,10 @@
   "disable_existing_loggers": false,
   "formatters": {
     "simple": {
-      "format": "%(asctime)s %(name)s:%(lineno)s %(funcName)s [%(levelname)s]: %(message)s"
+      "format": "%(asctime)s %(module)s:%(lineno)s [%(levelname)s]: %(message)s"
+    },
+    "contains_logger_name": {
+      "format": "%(asctime)s %(name)s:%(lineno)s [%(levelname)s]: %(message)s"
     }
   },
 
@@ -11,7 +14,7 @@
     "consoleHandler": {
       "class": "logging.StreamHandler",
       "level": "INFO",
-      "formatter": "simple",
+      "formatter": "contains_logger_name",
       "stream": "ext://sys.stdout"
     },
     "fileHandler": {
@@ -20,7 +23,7 @@
       "backupCount": 5,
       "interval" : 1,
       "level": "DEBUG",
-      "formatter": "simple",
+      "formatter": "contains_logger_name",
       "filename": "log/app.log",
       "encoding": "utf-8"
     },
@@ -30,7 +33,7 @@
       "backupCount": 5,
       "interval" : 1,
       "level": "DEBUG",
-      "formatter": "simple",
+      "formatter": "contains_logger_name",
       "filename": "log/test.log",
       "encoding": "utf-8"
     }
@@ -51,6 +54,21 @@
       "level": "DEBUG",
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": false
+    },
+    "controller.SampleController.public_method": {
+      "level": "DEBUG",
+      "handlers": ["consoleHandler", "fileHandler"],
+      "propagate": false
+    },
+    "controller.SampleController._private_method": {
+      "level": "INFO",
+      "handlers": ["consoleHandler", "fileHandler"],
+      "propagate": false
+    },
+    "controller.SampleController.print_log_debug": {
+      "level": "DEBUG",
+      "handlers": ["consoleHandler", "fileHandler"],
+      "propagate": true
     },
     "test": {
       "level": "DEBUG",
