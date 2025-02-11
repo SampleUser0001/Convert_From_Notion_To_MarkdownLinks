@@ -7,7 +7,7 @@ from logutil import LogUtil
 from importenv import ImportEnvKeyEnum
 
 from util.sample import Util
-from controller import MappingController
+from controller import MappingController, GenerateIndexController
 
 PYTHON_APP_HOME = os.getenv('PYTHON_APP_HOME')
 LOG_CONFIG_FILE = ['config', 'log_config.json']
@@ -37,15 +37,17 @@ if __name__ == '__main__':
     # args[0]はpythonのファイル名。
     # 実際の引数はargs[1]から。
     
-    logger.info('Sample Start!!')
-    logger.info('This is logger message!!')
-    logger.debug('This is logger message!!')
+    logger.info('Generate Notion index.md Start!!')
 
-    # environment.jsonの取得
-    logger.info(f'ImportEnvKeyEnum.SAMPLE.value : {ImportEnvKeyEnum.SAMPLE.value}')
-
-    sample_func()
-
-    Util.print()
+    name_filepath_dict = MappingController(
+        os.path.join(
+            PYTHON_APP_HOME, 
+            *[ImportEnvKeyEnum.INPUT_DIR.value])).map()
     
-    logger.info('Sample Finish!!')
+    GenerateIndexController(
+        export_dir=os.path.join(
+            PYTHON_APP_HOME, 
+            *[ImportEnvKeyEnum.INPUT_DIR.value]),
+        mapping_dict=name_filepath_dict).export()
+
+    logger.info('Generate Notion index.md  Finish!!')

@@ -38,6 +38,13 @@ class MappingController():
         self.input_dir_path = input_dir_path
     
     def map(self):
+        """ Notionからエクスポートしたディレクトリのパスから、NameとMarkdownのファイルパスを紐付ける。
+
+            Returns
+            -------
+            Dict[str, List[str]]
+                Nameをキーにした、Markdownのファイルパスのリスト
+        """
         all_csv_path = self._get_csv_path()
         self.logger.info(f'all_csv_path : {all_csv_path}')
         
@@ -112,13 +119,16 @@ class MappingController():
         """
 
         self.logger.debug(f'name_set : {name_set}')
-        self.logger.debug(f'markdown_list : {file_path_list}')
+        # self.logger.debug(f'markdown_list : {file_path_list}')
 
         found_all = []
         return_dict = {}
         # Nameを降順にソート。先頭が同じで、後ろが異なる場合、後ろの方が優先されるようにする。
         for name in reversed(list(name_set)):
             self.logger.debug(f'name : {name}')
+            if type(name) != str:
+                self.logger.warning(f'name is empty. name : {name}')
+                continue
             found_file_path_list = []
             for file_path in file_path_list:
                 if name in file_path and file_path not in found_all:
@@ -126,3 +136,26 @@ class MappingController():
                     found_all.append(file_path)
             return_dict[name] = found_file_path_list
         return return_dict
+    
+@apply_logger
+class GenerateIndexController():
+    def __init__(self, export_dir, mapping_dict) -> None:
+        self.export_dir = export_dir
+        self.mapping_dict = mapping_dict
+    
+    def generate_index(self):
+        index = []
+        index.append('# Export from Notion\n')
+        for name, file_path_list in self.mapping_dict.items():
+            index.append(f'## {name}\n')
+            for file_path in file_path_list:
+                index.append(f'- [{os.path.basename(file_path)}]({file_path.replace(self.export_dir, '.').replace(' ', '%20')})')
+            index.append('')
+        return index
+    
+    def export(self):
+        index_md_path = os.path.join(self.export_dir, 'index.md')
+        index = self.generate_index()
+        self.logger.info(f'index.md path : {index_md_path}')
+        with open(index_md_path, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(index))

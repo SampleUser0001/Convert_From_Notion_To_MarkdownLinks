@@ -55,20 +55,10 @@
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": false
     },
-    "controller.SampleController.public_method": {
-      "level": "INFO",
+    "controller.MappingController._mapping": {
+      "level": "DEBUG",
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": false
-    },
-    "controller.SampleController._private_method": {
-      "level": "INFO",
-      "handlers": ["consoleHandler", "fileHandler"],
-      "propagate": false
-    },
-    "controller.SampleController.print_log_debug": {
-      "level": "INFO",
-      "handlers": ["consoleHandler", "fileHandler"],
-      "propagate": true
     },
     "test_controller": {
       "level": "INFO",
