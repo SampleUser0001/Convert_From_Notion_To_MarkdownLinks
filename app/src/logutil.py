@@ -24,10 +24,6 @@ class LogUtil:
             log_conf['handlers']['fileHandler']['filename'] = os.getenv('PYTHON_APP_HOME') + '/' + log_conf['handlers']['fileHandler']['filename']
             log_conf['handlers']['testFileHandler']['filename'] = os.getenv('PYTHON_APP_HOME') + '/' + log_conf['handlers']['testFileHandler']['filename']
             
-            # テストファイルのログ設定を更新する。
-            test_config = log_conf['loggers']['test']
-            for name in cls.find_test_file():
-                log_conf['loggers'][name] = test_config
         return log_conf
 
     @classmethod

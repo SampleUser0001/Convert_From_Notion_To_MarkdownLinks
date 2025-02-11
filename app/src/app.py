@@ -7,7 +7,7 @@ from logutil import LogUtil
 from importenv import ImportEnvKeyEnum
 
 from util.sample import Util
-from controller import SampleController
+from controller import MappingController
 
 PYTHON_APP_HOME = os.getenv('PYTHON_APP_HOME')
 LOG_CONFIG_FILE = ['config', 'log_config.json']
@@ -48,8 +48,4 @@ if __name__ == '__main__':
 
     Util.print()
     
-    SampleController().print_log_info_only()
-    SampleController().print_log_debug()
-    
-    SampleController().public_method()
     logger.info('Sample Finish!!')

@@ -13,7 +13,7 @@
   "handlers": {
     "consoleHandler": {
       "class": "logging.StreamHandler",
-      "level": "INFO",
+      "level": "DEBUG",
       "formatter": "contains_logger_name",
       "stream": "ext://sys.stdout"
     },
@@ -41,22 +41,22 @@
 
   "loggers": {
     "__main__": {
-      "level": "DEBUG",
+      "level": "INFO",
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": false
     },
     "util": {
-      "level": "DEBUG",
+      "level": "INFO",
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": false
     },
     "controller": {
-      "level": "DEBUG",
+      "level": "INFO",
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": false
     },
     "controller.SampleController.public_method": {
-      "level": "DEBUG",
+      "level": "INFO",
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": false
     },
@@ -66,12 +66,12 @@
       "propagate": false
     },
     "controller.SampleController.print_log_debug": {
-      "level": "DEBUG",
+      "level": "INFO",
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": true
     },
-    "test": {
-      "level": "DEBUG",
+    "test_controller": {
+      "level": "INFO",
       "handlers": ["consoleHandler", "testFileHandler"],
       "propagate": false
     }

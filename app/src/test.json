@@ -1,3 +1,4 @@
 {
-    "SAMPLE": "test"
+    "SAMPLE": "test",
+    "INPUT_DIR": "test_input"
 }
